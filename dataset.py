@@ -339,35 +339,3 @@ def create_mtp_dataset_from_texts(
         num_masks=num_masks,
         max_length=max_length
     )
-
-if __name__ == "__main__":
-
-    # Load tokenizer
-    tokenizer = AutoTokenizer.from_pretrained("TinyLlama/TinyLlama-1.1B-Chat-v1.0")
-    if tokenizer.pad_token is None:
-        tokenizer.pad_token = tokenizer.eos_token
-
-    # Extend vocabulary with mask tokens
-    num_masks = 8
-
-    # Sample data
-    texts = [
-        "Hello, how are you today?",
-        "The weather is nice and sunny.",
-        "Machine learning is fascinating and powerful.",
-        "Python is a great programming language for AI."
-    ]
-
-    # Create dataset
-    dataset = create_mtp_dataset_from_texts(
-        texts=texts,
-        tokenizer=tokenizer,
-        num_masks=num_masks,
-        max_length=128
-    )
-
-    # Test the dataset
-    sample = dataset[0]
-    print("Sample output:")
-    for key, value in sample.items():
-        print(f"{key}: {value.shape} - {value}")
